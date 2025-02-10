@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "dimatechtest"
+version = "0.1.0"
+description = ""
+authors = ["Artem <Gakerchannel@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.8"
+pydantic-settings = "^2.7.1"
+sqlalchemy = "^2.0.38"
+uvicorn = "^0.34.0"
+pydantic = "^2.10.6"
+alembic = "^1.14.1"
+asyncpg = "^0.30.0"
+black = "^25.1.0"
+pyjwt = "^2.10.1"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
