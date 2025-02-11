@@ -1,3 +1,5 @@
+from app.repositories.accounts import AccountsRepository
+from app.repositories.payments import PaymentsRepository
 from app.repositories.users import UsersRepository
 
 
@@ -9,6 +11,8 @@ class DBManager:
         self.session = self.session_factory()
         
         self.users = UsersRepository(self.session)
+        self.accounts = AccountsRepository(self.session)
+        self.payments = PaymentsRepository(self.session)
         
         return self
     

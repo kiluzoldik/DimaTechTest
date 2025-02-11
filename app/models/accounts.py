@@ -15,6 +15,6 @@ class AccountsORM(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True)
     balance: Mapped[float]
-    transactions: Mapped[list["PaymentsORM"]] = relationship(back_populates="account")
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    transactions: Mapped[list["PaymentsORM"]] = relationship(back_populates="account")
     user: Mapped["UsersORM"] = relationship(back_populates="accounts")
