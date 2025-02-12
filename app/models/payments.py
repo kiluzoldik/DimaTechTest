@@ -13,7 +13,7 @@ class PaymentsORM(Base):
     __tablename__ = "payments"
     
     id: Mapped[int] = mapped_column(primary_key=True)
-    transaction_id: Mapped[int] = mapped_column(unique=True)
-    amount: Mapped[float]
+    transaction_id: Mapped[str] = mapped_column(unique=True)
+    amount: Mapped[int]
     account_id: Mapped[int] = mapped_column(ForeignKey("accounts.id"))
-    account: Mapped["AccountsORM"] = relationship(back_populates="transactions")
+    account: Mapped["AccountsORM"] = relationship(back_populates="transactions", lazy="joined")

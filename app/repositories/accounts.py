@@ -1,7 +1,11 @@
 from sqlalchemy import insert, select, update
+from sqlalchemy.orm import selectinload
+from sqlalchemy.exc import IntegrityError
+
+from app.exceptions import ObjectAlreadyExistsException
 from app.models.accounts import AccountsORM
 from app.repositories.base import BaseRepository
-from app.repositories.mappers.mappers import AcountDataMapper
+from app.repositories.mappers.mappers import AccountWithPaymentsDataMapper, AcountDataMapper
 from app.schemas.accounts import Account, AddAccount
 from app.schemas.payments import AddRequestPayment
 
@@ -27,5 +31,16 @@ class AccountsRepository(BaseRepository):
             .where(self.model.id == data.account_id)
             .values(balance=self.model.balance + data.amount)
         )
-        await self.session.execute(query)
+        try:
+            await self.session.execute(query)
+        except IntegrityError:
+            raise ObjectAlreadyExistsException
         
+    async def transactions_history_for_accounts(self, user_id: int):
+        query = (
+            select(self.model)
+            .options(selectinload(self.model.transactions))
+            .filter(self.model.user_id == user_id)
+        )
+        result = await self.session.execute(query)
+        return [AccountWithPaymentsDataMapper.map_to_domain_entity(object) for object in result.scalars().all()]

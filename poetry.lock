@@ -511,6 +511,17 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=8.3.2)", "pytest-
 type = ["mypy (>=1.11.2)"]
 
 [[package]]
+name = "py3dns"
+version = "4.0.2"
+description = "Python 3 DNS library"
+optional = false
+python-versions = ">=3.2"
+files = [
+    {file = "py3dns-4.0.2-py3-none-any.whl", hash = "sha256:36bffe62b59a72cfa09c03f0bd3473e0126f20ee4285d14c07415dbf6f5fd571"},
+    {file = "py3dns-4.0.2.tar.gz", hash = "sha256:98652e80ecec143c60f78f0e6b341631ca9a7560edd8dddfc864c02902618a39"},
+]
+
+[[package]]
 name = "pydantic"
 version = "2.10.6"
 description = "Data validation using Python type hints"
@@ -845,7 +856,17 @@ h11 = ">=0.8"
 [package.extras]
 standard = ["colorama (>=0.4)", "httptools (>=0.6.3)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "watchfiles (>=0.13)", "websockets (>=10.4)"]
 
+[[package]]
+name = "validate-email-address"
+version = "1"
+description = "Verify if an email address is valid and really exists."
+optional = false
+python-versions = "*"
+files = [
+    {file = "validate-email-address-1.tar.gz", hash = "sha256:9c00f978fed19d3df368b054292df7e8443761e44d3fadf95ef25499ea980f43"},
+]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "c6462b8053e7d4df69042d2cdc2084091f09a648d79de5f892b6a96798132ab7"
+content-hash = "b10191979a5af6cba5050a6f51e5db29a78e699c583b1211c404e3b0d91bd748"

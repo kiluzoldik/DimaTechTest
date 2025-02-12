@@ -44,7 +44,7 @@ def upgrade() -> None:
     op.create_table(
         "payments",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("transaction_id", sa.Integer(), nullable=False),
+        sa.Column("transaction_id", sa.String(), nullable=False),
         sa.Column("amount", sa.Float(), nullable=False),
         sa.Column("account_id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(

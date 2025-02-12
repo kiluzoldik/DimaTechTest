@@ -15,14 +15,22 @@ DBDep = Annotated[DBManager, Depends(get_db)]
 def get_token(request: Request) -> str:
     token = request.cookies.get("access_token", None)
     if not token:
-        raise HTTPException(status_code=401, detail="Access token not found")
+        raise HTTPException(status_code=401, detail="Токен отсутствует или недействителен")
     return token
     
 def get_current_user_id(token: str = Depends(get_token)) -> int:
     try:
         data = AuthService().decode_token(token)
     except Exception:
-        raise HTTPException(status_code=401, detail="Invalid access token")
+        raise HTTPException(status_code=401, detail="Ошибка аутентификации: токен недействителен")
     return data["user_id"]
 
 UserIdDep = Annotated[int, Depends(get_current_user_id)]
+
+async def check_admin_required(db: DBDep, user_id: int = Depends(get_current_user_id)):
+    is_admin = await AuthService(db).admin_required(user_id)
+    if not is_admin:
+        raise HTTPException(status_code=403, detail="У вас нет прав администратора")
+    return user_id
+
+AdminDep = Depends(check_admin_required)

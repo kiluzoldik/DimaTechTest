@@ -9,7 +9,6 @@ class PaymentsRepository(BaseRepository):
     mapper = PaymentDataMapper
     
     async def transactions_history(self, accounts_ids: list[int]):
-        print(f"{accounts_ids=}")
         query = (
             select(self.model)
             .filter(self.model.account_id.in_(accounts_ids))
@@ -18,6 +17,4 @@ class PaymentsRepository(BaseRepository):
         transactions = [
             self.mapper.map_to_domain_entity(object) for object in result.scalars().all()
         ]
-        print(f"{transactions=}")
         return transactions
-        
