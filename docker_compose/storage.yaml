@@ -1,0 +1,23 @@
+services:
+  financial_diary_db:
+    image: postgres:16
+    container_name: financial_diary_db
+    restart: always
+    env_file:
+      - ../.env_docker
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASS}"
+      POSTGRES_DB: "${DB_NAME}"
+    ports:
+      - "6432:5432"
+    networks:
+      - DimaTechNetwork
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+networks:
+  DimaTechNetwork:
+
+volumes:
+  pg-data:

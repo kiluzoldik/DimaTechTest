@@ -1,0 +1,15 @@
+services:
+  financial_diary_back:
+    container_name: financial_diary_back
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8345:8000"
+    depends_on:
+      - financial_diary_db
+    networks:
+      - DimaTechNetwork
+
+networks:
+  DimaTechNetwork:
